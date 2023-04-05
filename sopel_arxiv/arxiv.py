@@ -1,3 +1,4 @@
+from functools import partial
 from pathlib import PurePath
 import requests
 import urllib.parse
