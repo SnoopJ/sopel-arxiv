@@ -3,6 +3,12 @@
 A plugin for summarizing links to [arXiv.org](https://arxiv.org) in the IRC bot
 [Sopel](https://sopel.chat/).
 
+## Installation
+
+```bash
+$ pip install sopel-arxiv
+```
+
 ## Usage
 
 When this plugin is active, the bot will look for links to arXiv articles and
