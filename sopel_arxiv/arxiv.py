@@ -1,11 +1,14 @@
-from functools import partial
-from pathlib import PurePath
+import logging
 import requests
 import urllib.parse
 import xml.etree
+from functools import partial
+from pathlib import PurePath
 
 from sopel import plugin
 
+
+LOGGER = logging.getLogger(__name__)
 
 ARXIV_PATTS = [
     r"https?://arxiv.org/abs/(?P<arxiv_id>.*)",
@@ -21,8 +24,12 @@ def arxiv_summarize(bot, trigger):
     entryid_raw = PurePath(urlinfo.path).parts[-1]
     entryid = entryid_raw.removesuffix(".pdf")
 
-    response = requests.get(ARXIV_QUERY_URL.format(entryid=entryid))
-    response.raise_for_status()
+    try:
+        response = requests.get(ARXIV_QUERY_URL.format(entryid=entryid))
+        response.raise_for_status()
+    except:
+        LOGGER.exception("Request to arXiv API failed")
+        return False
 
     root = xml.etree.ElementTree.fromstring(response.content)
     ns = {"feed": "http://www.w3.org/2005/Atom"}
