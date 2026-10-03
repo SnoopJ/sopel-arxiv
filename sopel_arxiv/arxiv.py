@@ -12,7 +12,7 @@ LOGGER = logging.getLogger(__name__)
 
 ARXIV_PATTS = [
     r"https?://arxiv.org/abs/(?P<arxiv_id>.*)",
-    r"https?://arxiv.org/pdf/(?P<arxiv_id>.*)\.pdf",
+    r"https?://arxiv.org/pdf/(?P<arxiv_id>.*)(\.pdf)?",
 ]
 ARXIV_QUERY_URL = "https://export.arxiv.org/api/query?id_list={entryid}"
 
